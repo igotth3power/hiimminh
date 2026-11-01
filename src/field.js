@@ -169,8 +169,8 @@ const vertexShader = /* glsl */ `
       // turned by the tile's own angle, and some depth), and while scattered the pieces drift freely ----
       if (aKind < 0.5 && gen < 0.5 && uChaos > 0.0) {
         float off = length(uScatter);
-        // inside uChaosZone of the centre the face is whole; beyond it, it breaks up, completely 0.32 out (about a third of the way to the edge)
-        float m = uChaos * pow(clamp((off - uChaosZone) / max(0.05, 0.32 - uChaosZone), 0.0, 1.0), 0.9) * still;
+        // inside uChaosZone of the centre the face is whole; beyond it, it breaks up, completely 0.42 out (a little under half way to the edge)
+        float m = uChaos * pow(clamp((off - uChaosZone) / max(0.05, 0.42 - uChaosZone), 0.0, 1.0), 0.9) * still;
         // each piece heads for its own random spot, spread evenly over the whole window (centred on it): placed on
         // the reference plane and carried along the tile's own line of sight, so the spread is even on screen
         vec2 spot = uScreenC + (vec2(rnd(iid, 7u), rnd(iid, 8u)) * 2.0 - 1.0) * uScreenR * 1.05;
@@ -275,7 +275,7 @@ export function createMaterial(atlasCanvas, bg) {
     uBlur: { value: 1 },
     uMotes: { value: 0 },
     uChaos: { value: 0 },
-    uChaosZone: { value: 0.02 },
+    uChaosZone: { value: 0.05 },
     uAlive: { value: 1 },
     uScatter: { value: new THREE.Vector2() },
     uScreenC: { value: new THREE.Vector2() },

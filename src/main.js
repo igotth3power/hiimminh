@@ -61,7 +61,7 @@ const params = {
   chaosAmount: 1,
   chaosRandom: false, // restore point at a random place (else the centre of the window)
   alive: 1,           // the tiles stir even when the portrait is whole
-  chaosZone: 0.02,    // radius around the restore point where the face is whole (pointer units)
+  chaosZone: 0.05,    // radius around the restore point where the face is whole (pointer units)
   home: () => goHome(),
 }
 
@@ -348,7 +348,7 @@ function tick(rafTime) {
   // sign once most of the portrait has landed, only while at home
   // how scattered the portrait is (as in the shader), eased over ~0.6 s: the signature comes forward as it breaks up
   const offC = Math.hypot(ex - ox, ey - oy)
-  const scatterRamp = (d) => THREE.MathUtils.clamp((d - params.chaosZone) / Math.max(0.05, 0.32 - params.chaosZone), 0, 1)
+  const scatterRamp = (d) => THREE.MathUtils.clamp((d - params.chaosZone) / Math.max(0.05, 0.42 - params.chaosZone), 0, 1)
   pointerScatter = params.chaos ? Math.min(1, params.chaosAmount) * scatterRamp(Math.hypot(pointer.sx - ox, pointer.sy - oy)) : 0
   const scatterNow = params.chaos ? Math.min(1, params.chaosAmount) * scatterRamp(offC) * (1 - fly) : 0
   sigScatter += (scatterNow - sigScatter) * (1 - Math.exp(-dt * 3.5))

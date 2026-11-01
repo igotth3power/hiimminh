@@ -12,3 +12,6 @@ public/mediapipe/
 
 # originals kept locally, never published (the site uses the cut-out public/portrait.png)
 private/
+
+# brainstorm companion sessions (superpowers)
+.superpowers/
