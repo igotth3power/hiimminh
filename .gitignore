@@ -1,0 +1,14 @@
+# dependencies and build output (Vercel installs and builds them itself)
+node_modules/
+dist/
+
+# copied from node_modules on install (scripts/copy-mediapipe.mjs, run by postinstall)
+public/mediapipe/
+
+# local / editor
+.vercel/
+.DS_Store
+*.log
+
+# originals kept locally, never published (the site uses the cut-out public/portrait.png)
+private/

@@ -1,0 +1,108 @@
+:root {
+  --bg: #0a0a0b;
+  --fg: #e9e6e1;
+  --muted: #8d8a85;
+  --line: rgba(255, 255, 255, 0.14);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+  overscroll-behavior: none;
+}
+
+#sig {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  opacity: 0;
+}
+
+#c {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+.drop {
+  position: fixed;
+  inset: 12px;
+  display: grid;
+  place-items: center;
+  border: 2px dashed rgba(255, 255, 255, 0.4);
+  border-radius: 16px;
+  background: rgba(10, 10, 11, 0.6);
+  font-size: 18px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.drop.on { opacity: 1; }
+
+/* intro: the M is drawn as the works load, then the page fades away */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 6px;
+  background: var(--bg);
+  transition: opacity 0.9s ease, visibility 0.9s;
+}
+
+.loader.is-done { opacity: 0; visibility: hidden; }
+
+.loader-mark {
+  width: min(240px, 60vw);
+  height: auto;
+  overflow: visible;
+  margin-bottom: 18px;
+}
+
+.loader-mark path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* white neon: the unlit tube of the whole M, and the lit part written on top of it (a white core in layers of
+   glow). --neon dims it for the switch-on flicker at the end. */
+.loader { --neon: 1; }
+.loader-trace { stroke: rgba(255, 255, 255, 0.07); stroke-width: 1.4; }   /* viewBox units (~2.4 px) */
+.loader-ink { stroke: #fff; stroke-width: 1.4; opacity: var(--neon); }   /* glow: the #neon SVG filter */
+
+.loader-pct {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  font: 400 48px/1 "Allura", "Segoe Script", cursive;
+  color: #fff;
+  opacity: calc(0.55 + 0.45 * var(--neon));
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.8), 0 0 12px rgba(220, 232, 255, 0.55), 0 0 26px rgba(200, 216, 255, 0.35);
+}
+
+/* one fixed slot per digit (centred), so the flowing figures never shift the counter */
+.loader-pct .d {
+  display: inline-block;
+  width: 0.5em;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader { transition: none; }
+}
